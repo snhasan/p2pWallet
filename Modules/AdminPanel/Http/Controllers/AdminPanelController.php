@@ -39,7 +39,7 @@ class AdminPanelController extends Controller
                 }
         }
                         
-        return view('adminpanel::index',compact('allUser','userWithMostConv','userWithMostConv'));
+        return view('adminpanel::index',compact('allUser','userWithMostConv'));
     }
 
     public function userDetails($id)
