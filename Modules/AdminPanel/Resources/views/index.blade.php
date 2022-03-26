@@ -76,7 +76,34 @@ section{
             <div class="">
                 <section>
                 <!--for demo wrap-->
-                    <h1>User List</h1>
+                    <div class="tbl-header" style="background: linear-gradient(to right top, #094aac, #153997, #192783, #1a156e, #18015a);">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                        <thead>
+                            <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Account No.</th>
+                            <th>No. Of Transactions</th>
+                            <th>Details</th>
+                            </tr>
+                        </thead>
+                        </table>
+                    </div>
+                    <div class="tbl-content" style="height: auto">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">User With Most Transaction</td>
+                                    <td>{{ $userWithMostConv->name }}</td>
+                                    <td>{{ $userWithMostConv->account }}</td>
+                                    <td>{{ $userWithMostConv->NoOfTran }}</td>
+                                    <td> <a href="{{ route('admin.userDetails',$userWithMostConv->id) }}">Details</a> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
                     <div class="tbl-header">
                         <table cellpadding="0" cellspacing="0" border="0">
                         <thead>
@@ -94,6 +121,7 @@ section{
                     <div class="tbl-content">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tbody>
+                                
                             <?php $i=1; ?>
                                 @foreach($allUser as $user)
                                 

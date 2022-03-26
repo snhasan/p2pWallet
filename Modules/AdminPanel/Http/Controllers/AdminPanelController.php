@@ -18,7 +18,28 @@ class AdminPanelController extends Controller
     {
         $allUser = User::where('role',2)->get();
 
-        return view('adminpanel::index',compact('allUser'));
+        $tCount = 0;
+
+        $userWithMostConv = collect();;
+
+        foreach( $allUser as $user){
+            $tranHistory = transaction::leftjoin('users','users.account','transactionhistory.fromAccount')
+                                    ->where('fromAccount',$user->account)
+                                    ->orWhere('toAccount',$user->account)
+                                    ->where('isActive',1)
+                                    ->select(
+                                        DB::raw("users.*,transactionhistory.* ,COUNT(*) as NoOfTran"))
+                                    ->orderBy('NoOfTran','desc')
+                                    ->get()->first();
+            
+                if($tranHistory->NoOfTran > $tCount)
+                {
+                    $tCount = $tranHistory->NoOfTran;
+                    $userWithMostConv = $tranHistory;
+                }
+        }
+                        
+        return view('adminpanel::index',compact('allUser','userWithMostConv','userWithMostConv'));
     }
 
     public function userDetails($id)
